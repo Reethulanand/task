@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <!-- <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/mystyle.css') }}">  -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+	</script>
+	<script>
+		$(function() {
+			
+			$('button#search').bind('click', function() {
+			$.getJSON('/search_process', {
+			  string: $('#string').val(),
+			}, function(data) {
+				if (data.result == "numerics"){
+					$("#result").text('string is numeric')
+				}
+				else if (data.result == "alphabets"){
+					$("#result").text('string is alphabets')
+				}
+				else {
+					$("#result").text('string is alphanumeric')
+				}
+			});
+			return false;
+		  });
+		});
+		  
+	</script>
+</head>
+	<body>
+		<div class='container'>
+		<h3>String Checker</h3>
+			<form>
+                <label for = "string">Enter the string:</label>
+				<input type=text  id = string size=5 name=string>
+				<button id=search class='btn btn-default'>Search</button>
+			</form>
+		<p id=result></p>
+		</div>
+	</body>
+</html>
